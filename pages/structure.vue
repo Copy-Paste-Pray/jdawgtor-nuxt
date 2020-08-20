@@ -15,7 +15,7 @@
                             <option value="1.3.0">1.16.1</option>
                             <option value="1.3.1">1.16.2</option>
                         </select>
-                        <div class="bitpack" style="position: absolute; right: 0;">
+                        <div class="bitpack" style="">
                             <span style="margin-bottom: 5px; display: inline-block;">Check out Bitpack by <a class="link" href="https://www.planetminecraft.com/member/16bitmap/" target="_blank">16bitmap</a></span>
                             <a class="btn" :href="'http://'+hostURL+'/sg/Bitpack-Custom-Structures-1.16.zip'" target="_blank">Download Bitpack</a>
                             <div class="notice">Bitpack works with Structure Generator (download below)</div>
@@ -242,7 +242,7 @@
             </p>
         </div>
         <div v-if="info==null" class="animated fadeIn">
-            <a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v'+msgOptions.sgver+'.zip'" download="JDawgtorStructureGenerator.zip">Download Latest Structure Generator</a>
+            <a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v1.3.1.zip'" download="JDawgtorStructureGenerator.zip">Download Latest Structure Generator</a>
             <div class="notice" style="margin-top: 5px;">Just in case you just need the Generator</div>
         </div>
         <br /><br />
@@ -476,7 +476,7 @@ export default {
     .swal2-actions > button:hover{
         background-image: linear-gradient(to left, #fcb9b9, #ffc0ac, #fecaa1, #f3d59b, #e2e29e, #d1eaab, #c0f0bb, #b2f5ce, #b1f6e0, #b8f5ee, #c4f3f6, #d4f1f8) !important;
     }
-    .bitpack{width: 600px; margin-top: 5px;}
+    .bitpack{width: 440px; margin-top: 5px; margin-left: 380px;}
 // FILE UPLOAD
 //////////////////////////////////////////////////////////////
     .dropbox {
