@@ -9,10 +9,9 @@
                 <div>
                     <h2 class="section-title">Minecraft Version:</h2>
                     <div class="flex">
-                        <select style="height: 28px;" name="mc-version" id="mc-version" v-model="sgver">
+                        <select style="height: 28px;" name="mc-version" id="mc-version" v-model="sgver" :disabled="sgverEnabled==false">
                             <option value="null">--Select Version--</option>
-                            <option value="1.3.0">1.16.0</option>
-                            <option value="1.3.0">1.16.1</option>
+                            <option value="1.3.0">1.16.0 - 1.16.1</option>
                             <option value="1.3.1">1.16.2</option>
                         </select>
                         <div class="bitpack" style="">
@@ -212,7 +211,7 @@
             </section>
         </div>
         <br />
-        <div v-if="info!==null" class="animated fadeIn">
+        <div v-if="info!==null">
             <!-- <button class="btn" @click="downloadPack()">Download Pack!</button> -->
             <h2>STRUCTURE GENERATION COMPLETE!</h2>
             <h3>How this works:</h3>
@@ -241,7 +240,7 @@
                 We will delete your pack file after a week to keep the server healthy. Feel free to come back and create a new pack anytime.
             </p>
         </div>
-        <div v-if="info==null" class="animated fadeIn">
+        <div v-if="info==null">
             <a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v1.3.1.zip'" download="JDawgtorStructureGenerator.zip">Download Latest Structure Generator</a>
             <div class="notice" style="margin-top: 5px;">Just in case you just need the Generator</div>
         </div>
@@ -264,16 +263,17 @@ export default {
   },
   data(){
       return{
+        sgverEnabled:true,
         hostURL: 'api.jdawgtor.com',
         userGUID: null,
         info: null,
         sgver: "1.3.1",
         msgInitValues: {
-            "sgver": "1.3.1","placement": null, "yRangeMin": null,"yRangeMax": null,"posx": 0, "posy": 0, "posz": 0, "rotation": null, "weight": 50,"structName":"","dimension": null,"dimensionOther": "","biome":null,"biomeOther":""
+            "placement": null, "yRangeMin": null,"yRangeMax": null,"posx": 0, "posy": 0, "posz": 0, "rotation": null, "weight": 50,"structName":"","dimension": null,"dimensionOther": "","biome":null,"biomeOther":""
         },
         msgOptions: [],
         msgDefaults: { 
-            "sgver": "1.3.1", "placement": "surface", "posx": "0", "posy": "0", "posz": "0", "rotation": "yes", "weight": "50","dimension": null,"dimensionOther": "","biome":null,"biomeOther":"" 
+            "placement": "surface", "posx": 0, "posy": 0, "posz": 0, "rotation": "yes", "weight": "50","dimension": null,"dimensionOther": "","biome":null,"biomeOther":"" 
         },
         uploadedFiles: [],
         uploadError: null,
@@ -314,13 +314,14 @@ export default {
       },
       filesChange(fieldName, fileList) {
         const formData = new FormData();
+        this.sgverEnabled = false
         
         if (!fileList.length) return;
         Array
           .from(Array(fileList.length).keys())
           .map(x => {
             formData.append(fieldName, fileList[x], fileList[x].name);
-            this.msgOptions.push({filename: fileList[x].name,userGUID:this.userGUID,...this.msgInitValues});
+            this.msgOptions.push({filename: fileList[x].name,userGUID:this.userGUID,sgver:this.sgver,...this.msgInitValues});
           });
         this.saveFileUploads(formData);
       },
@@ -371,7 +372,7 @@ export default {
                                     formatErrcnt++;
                                     fileFormatErrCnt++;
                                 }
-                                console.log(thisfile.yRangeMin,thisfile.yRangeMin.match(/^[\d]{1,3}$/g));
+                                // console.log(thisfile.yRangeMin,thisfile.yRangeMin.match(/^[\d]{1,3}$/g));
                             }
                         }
                         if(thisfile.yRangeMax==null){
@@ -385,7 +386,7 @@ export default {
                                     formatErrcnt++;
                                     fileFormatErrCnt++;
                                 }
-                                console.log(thisfile.yRangeMax,thisfile.yRangeMax.match(/^[\d]{1,3}$/));
+                                // console.log(thisfile.yRangeMax,thisfile.yRangeMax.match(/^[\d]{1,3}$/));
                             }
                         }
 
@@ -446,7 +447,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
     label{padding-right: 10px;}
     h1{margin-bottom: 10px;}
     section{margin: 10px 10px 0 10px;}
@@ -477,8 +478,7 @@ export default {
         background-image: linear-gradient(to left, #fcb9b9, #ffc0ac, #fecaa1, #f3d59b, #e2e29e, #d1eaab, #c0f0bb, #b2f5ce, #b1f6e0, #b8f5ee, #c4f3f6, #d4f1f8) !important;
     }
     .bitpack{width: 440px; margin-top: 5px; margin-left: 380px;}
-// FILE UPLOAD
-//////////////////////////////////////////////////////////////
+/* FILE UPLOAD */
     .dropbox {
         outline: 2px dashed grey;
         outline-offset: -10px;
@@ -496,8 +496,7 @@ export default {
     }
     .dropbox p {font-size: 1.2em; text-align: center; padding: 10px 0;}
 
-// Slider
-//////////////////////////////////////////////////////////////
+/* Slider */
 .slidecontainer {
   width: 100%;
   display: flex;
