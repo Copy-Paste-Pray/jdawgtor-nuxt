@@ -6,13 +6,23 @@
                 <img class="logo" width="100" src="../assets/img/sg-logo-inverted.png" />
             </div>
             <section>
-                <h2 class="section-title">Minecraft Version:</h2>
-                <select name="mc-version" id="mc-version" v-model="sgver">
-                    <option value="null">--Select Version--</option>
-                    <option value="1.3.0">1.16.0</option>
-                    <option value="1.3.0">1.16.1</option>
-                    <option value="1.3.1">1.16.2</option>
-                </select>
+                <div>
+                    <h2 class="section-title">Minecraft Version:</h2>
+                    <div class="flex">
+                        <select style="height: 28px;" name="mc-version" id="mc-version" v-model="sgver">
+                            <option value="null">--Select Version--</option>
+                            <option value="1.3.0">1.16.0</option>
+                            <option value="1.3.0">1.16.1</option>
+                            <option value="1.3.1">1.16.2</option>
+                        </select>
+                        <div class="bitpack" style="position: absolute; right: 0;">
+                            <span style="margin-bottom: 5px; display: inline-block;">Check out Bitpack by <a class="link" href="https://www.planetminecraft.com/member/16bitmap/" target="_blank">16bitmap</a></span>
+                            <a class="btn" :href="'http://'+hostURL+'/sg/Bitpack-Custom-Structures-1.16.zip'" target="_blank">Download Bitpack</a>
+                            <div class="notice">Bitpack works with Structure Generator (download below)</div>
+                        </div>
+                    </div>
+                </div>
+                
             </section>
             <section v-if="sgver">
                 <h2 class="section-title">Upload Structure Files</h2>
@@ -20,7 +30,7 @@
                     <div class="dropbox">
                     <input type="file" multiple :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
                         accept="image/*" class="input-file">
-                        <p v-if="isInitial || isSuccess">
+                        <p>
                         Drag your file(s) here<br> or click to browse
                         </p>
                         <p v-if="isSaving">
@@ -208,7 +218,7 @@
             <h3>How this works:</h3>
             <strong>1. First you'll need to have JDawgtor's Structure Generator data pack installed.</strong>
             <br /><a class="link" target="_blank" href="https://minecraft.gamepedia.com/Tutorials/Installing_a_data_pack">Learn how to install data packs. (Minecraft Wiki)</a><br />
-            <br /><a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v'+msgOptions.sgver" download="JDawgtorStructureGenerator.zip">Download Structure Generator</a>
+            <br /><a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v'+msgOptions.sgver+'.zip'" download="JDawgtorStructureGenerator.zip">Download Structure Generator</a>
             &nbsp;<span class="notice">NOTE: We added the correct pack for your Minecraft version.</span>
             <br />
             <br /><strong>2. You'll need this custom structure data pack we put together special just for you:</strong>
@@ -230,6 +240,10 @@
                 <br /><br />
                 We will delete your pack file after a week to keep the server healthy. Feel free to come back and create a new pack anytime.
             </p>
+        </div>
+        <div v-if="info==null" class="animated fadeIn">
+            <a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v'+msgOptions.sgver+'.zip'" download="JDawgtorStructureGenerator.zip">Download Latest Structure Generator</a>
+            <div class="notice" style="margin-top: 5px;">Just in case you just need the Generator</div>
         </div>
         <br /><br />
         <!--
@@ -259,7 +273,7 @@ export default {
         },
         msgOptions: [],
         msgDefaults: { 
-            "sgver": "1.3.1", "placement": "surface", "posx": "0", "posy": "0", "posz": "0", "rotation": "yes", "weight": "100","dimension": null,"dimensionOther": "","biome":null,"biomeOther":"" 
+            "sgver": "1.3.1", "placement": "surface", "posx": "0", "posy": "0", "posz": "0", "rotation": "yes", "weight": "50","dimension": null,"dimensionOther": "","biome":null,"biomeOther":"" 
         },
         uploadedFiles: [],
         uploadError: null,
@@ -456,13 +470,13 @@ export default {
     ::-webkit-input-placeholder{color: #000; font-style: italic}
     :-ms-input-placeholder {color: #000; font-style: italic}
     ::placeholder {color: #000; font-style: italic}
-    .link, .link:hover,.link:visited{color: #FFF;}
+    .link, .link:hover,.link:visited{color: #FFF; text-decoration: underline;}
     .swal2-content,.swal2-title,.swal2-header, .swal2-icon{text-shadow: none;}
     .swal2-actions > button.swal2-styled{color: #000; background-image: linear-gradient(to right, #fcb9b9, #ffc0ac, #fecaa1, #f3d59b, #e2e29e, #d1eaab, #c0f0bb, #b2f5ce, #b1f6e0, #b8f5ee, #c4f3f6, #d4f1f8);}
     .swal2-actions > button:hover{
         background-image: linear-gradient(to left, #fcb9b9, #ffc0ac, #fecaa1, #f3d59b, #e2e29e, #d1eaab, #c0f0bb, #b2f5ce, #b1f6e0, #b8f5ee, #c4f3f6, #d4f1f8) !important;
     }
-    .vert{}
+    .bitpack{width: 600px; margin-top: 5px;}
 // FILE UPLOAD
 //////////////////////////////////////////////////////////////
     .dropbox {
@@ -548,4 +562,5 @@ export default {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
 }
+.flex{display: flex; flex-direction: row;}
 </style>
