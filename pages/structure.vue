@@ -289,6 +289,13 @@ export default {
       isFailed() {return this.currentStatus === STATUS_FAILED;}
   },
   methods:{
+      hostURLCalc() {
+          var host = window.location.hostname;
+          console.log(host);
+          if(host.indexOf('localhost')!==-1){
+              this.hostURL = 'localhost:3001';
+          }
+      },
       reset() {
         this.currentStatus = STATUS_INITIAL;
         this.uploadedFiles = [];
@@ -390,7 +397,7 @@ export default {
                             }
                         }
 
-                        if(thisfile.yRangeMin > thisfile.yRangeMax){
+                        if(parseInt(thisfile.yRangeMin,10) > parseInt(thisfile.yRangeMax,10)){
                             thisfile.formatValuesList.push('YRangeMin to be less than YRangeMax to be ');
                             formatErrcnt++;
                             fileFormatErrCnt++;
@@ -443,6 +450,7 @@ export default {
     this.reset();
     this.userGUID = this.genGUID();
     this.msgOptions.sgver = "1.3.1";
+    this.hostURLCalc();
   }
 }
 </script>
