@@ -217,7 +217,7 @@
             <h3>How this works:</h3>
             <strong>1. First you'll need to have JDawgtor's Structure Generator data pack installed.</strong>
             <br /><a class="link" target="_blank" href="https://minecraft.gamepedia.com/Tutorials/Installing_a_data_pack">Learn how to install data packs. (Minecraft Wiki)</a><br />
-            <br /><a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v'+msgOptions.sgver+'.zip'" download="JDawgtorStructureGenerator.zip">Download Structure Generator</a>
+            <br /><a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v'+sgver+'.zip'" download="JDawgtorStructureGenerator.zip">Download Structure Generator</a>
             &nbsp;<span class="notice">NOTE: We added the correct pack for your Minecraft version.</span>
             <br />
             <br /><strong>2. You'll need this custom structure data pack we put together special just for you:</strong>
