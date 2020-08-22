@@ -1,4 +1,6 @@
 # jdawgtor-nuxt
+Front End for JDawgtor's Custom Structure Generator Minecraft Data Pack
+
 
 ## Build Setup
 
