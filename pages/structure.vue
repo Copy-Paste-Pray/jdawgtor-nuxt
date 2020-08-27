@@ -94,7 +94,7 @@
                             <label for="">PosX:&nbsp;</label><input type="text" class="short" placeholder="posX" v-model="msgOptions[index].posx" />&nbsp;
                             <label for="">PosY:&nbsp;</label><input type="text" class="short" placeholder="posY" v-model="msgOptions[index].posy" />&nbsp;
                             <label for="">PosZ:&nbsp;</label><input type="text" class="short" placeholder="posZ" v-model="msgOptions[index].posz" />&nbsp;
-                            <span class="notice">NOTE: Must be a number (ex. -123 or 123) </span>
+                            <span class="notice">Allowed: Number -9999 to 9999</span>
                         </div>
                     </div>
                     <div class="cols">
@@ -109,7 +109,8 @@
                                 
                             </select><br />
                             <div v-if="msgOptions[index].dimension=='custom'">
-                                Custom Dimension:<br /><input type="text" v-model="msgOptions[index].dimensionOther" placeholder="i.e. mypack:mydimension" />
+                                Custom Dimension:<br /><input type="text" v-model="msgOptions[index].dimensionOther" placeholder="i.e. mypack:mydimension" /><br />
+                                <div class="notice">Allowed: a-z 0-9 - _ : limit 200</div>
                             </div>
                         </div>
                         <div class="col">
@@ -198,8 +199,10 @@
                                 <option value="minecraft:wooded_mountains" data-i18n="wooded_mountains">Wooded Mountains</option>
                             </select><br />
                             <div v-if="msgOptions[index].biome=='custom'">
-                                Custom Biome:<br /><input type="text" v-model="msgOptions[index].biomeOther" placeholder="i.e. mypack:mybiome" />
+                                Custom Biome:<br /><input type="text" v-model="msgOptions[index].biomeOther" placeholder="i.e. mypack:mybiome" /><br />
+                                <div class="notice">Allowed: a-z 0-9 - _ : limit 200</div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -354,18 +357,40 @@ export default {
                 thisfile.requiredValuesList = [];
                 thisfile.formatValuesList = [];
                 if(thisfile){
+                    // POS
+                    console.log(thisfile.posx,thisfile.posy,thisfile.posz);
                     if(thisfile.posx==null){
                         thisfile.requiredValuesList.push('PosX');
                         requiredErrcnt++;
+                    }else{
+                        if(thisfile.posx.toString().match(/^[\d]{1,5}$/g)==null){
+                            thisfile.formatValuesList.push('PosX');
+                            formatErrcnt++;
+                            fileFormatErrCnt++;
+                        }
                     }
                     if(thisfile.posy==null){
                         thisfile.requiredValuesList.push('PosY');
                         requiredErrcnt++;
+                    }else{
+                        if(thisfile.posy.toString().match(/^[\d]{1,5}$/g)==null){
+                            thisfile.formatValuesList.push('PosY');
+                            formatErrcnt++;
+                            fileFormatErrCnt++;
+                        }
                     }
                     if(thisfile.posz==null){
                         thisfile.requiredValuesList.push('PosZ');
                         requiredErrcnt++;
+                    }else{
+                        if(thisfile.posz.toString().match(/^[\d]{1,5}$/g)==null){
+                            thisfile.formatValuesList.push('PosZ');
+                            formatErrcnt++;
+                            fileFormatErrCnt++;
+                        }
                     }
+
+                    // YRANGE
                     if(thisfile.placement=='y_range'){
                         console.log(thisfile.yRangeMin,thisfile.yRangeMax);
                         if(thisfile.yRangeMin==null){
@@ -401,6 +426,25 @@ export default {
                             thisfile.formatValuesList.push('YRangeMin to be less than YRangeMax to be ');
                             formatErrcnt++;
                             fileFormatErrCnt++;
+                        }
+                    }
+                   // "dimension": null,"dimensionOther": "","biome":null,"biomeOther":"" 
+                    if(thisfile.dimension==='custom'){
+                        if(thisfile.dimensionOther){
+                            if(thisfile.dimensionOther.match(/^[a-zA-Z0-9\:\_\-]{1,200}$/)==null){
+                                thisfile.formatValuesList.push('CustomDimensionName');
+                                formatErrcnt++;
+                                fileFormatErrCnt++;
+                            }
+                        }
+                    }
+                    if(thisfile.biome==='custom'){
+                        if(thisfile.biomeOther){
+                            if(thisfile.biomeOther.match(/[a-zA-Z0-9\:\_\-]{1,200}$/)==null){
+                                thisfile.formatValuesList.push('CustomBiomeName');
+                                formatErrcnt++;
+                                fileFormatErrCnt++;
+                            }
                         }
                     }
                 }
@@ -455,7 +499,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
     label{padding-right: 10px;}
     h1{margin-bottom: 10px;}
     section{margin: 10px 10px 0 10px;}

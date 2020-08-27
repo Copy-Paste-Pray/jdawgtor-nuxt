@@ -11,6 +11,21 @@
   </div>
 </template>
 
+<script>
+export default {
+  data(){
+    return {
+      title: 'JDawgtor'
+    }
+  },
+  head() {
+    return {
+      title: this.title
+    }
+  }
+}
+</script>
+
 <style>
 body {
   font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
