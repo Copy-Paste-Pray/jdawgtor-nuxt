@@ -16,7 +16,7 @@
                         </select>
                         <div class="bitpack" style="">
                             <span style="margin-bottom: 5px; display: inline-block;">Check out Bitpack by <a class="link" href="https://www.planetminecraft.com/member/16bitmap/" target="_blank">16bitmap</a></span>
-                            <a class="btn" :href="'http://'+hostURL+'/sg/Bitpack-Custom-Structures-1.16.zip'" target="_blank">Download Bitpack</a>
+                            <a class="btn" :href="'https://'+hostURL+'/sg/Bitpack-Custom-Structures-1.16.zip'" target="_blank">Download Bitpack</a>
                             <div class="notice">Bitpack works with Structure Generator (download below)</div>
                         </div>
                     </div>
@@ -217,11 +217,11 @@
             <h3>How this works:</h3>
             <strong>1. First you'll need to have JDawgtor's Structure Generator data pack installed.</strong>
             <br /><a class="link" target="_blank" href="https://minecraft.gamepedia.com/Tutorials/Installing_a_data_pack">Learn how to install data packs. (Minecraft Wiki)</a><br />
-            <br /><a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v'+sgver+'.zip'" download="JDawgtorStructureGenerator.zip">Download Structure Generator</a>
+            <br /><a class="btn" :href="'https://'+hostURL+'/sg/StructureGenerator-v'+sgver+'.zip'" download="JDawgtorStructureGenerator.zip">Download Structure Generator</a>
             &nbsp;<span class="notice">NOTE: We added the correct pack for your Minecraft version.</span>
             <br />
             <br /><strong>2. You'll need this custom structure data pack we put together special just for you:</strong>
-            <br /><br /><a class="btn" :href="'http://'+hostURL+'/sg/JDawgtorsStructureGenDataPack-'+userGUID+'.zip'" download="JDawgtorCustomStructurePack.zip">Download Custom Structure Pack</a>
+            <br /><br /><a class="btn" :href="'https://'+hostURL+'/sg/JDawgtorsStructureGenDataPack-'+userGUID+'.zip'" download="JDawgtorCustomStructurePack.zip">Download Custom Structure Pack</a>
             &nbsp;<span class="notice">NOTE: Each pack is customized with your structures (for your Minecraft version).</span>
             <br /><br /><strong>Then you can reset or regenerate:</strong>
             <br /><br />
@@ -235,13 +235,13 @@
                 We can only keep the generated files around for a short time. 
                 <br />Please drag this link to your bookmarks so you can access it later. 
                 <br /><br />
-                &nbsp;&gt;&nbsp;<a class="link" :href="'http://'+hostURL+'/sg/JDawgtorsStructureGenDataPack-'+userGUID+'.zip'" title="JDawgtor SG Custom Data Pack">JDawgtor Minecraft SG DataPack (custom)</a>
+                &nbsp;&gt;&nbsp;<a class="link" :href="'https://'+hostURL+'/sg/JDawgtorsStructureGenDataPack-'+userGUID+'.zip'" title="JDawgtor SG Custom Data Pack">JDawgtor Minecraft SG DataPack (custom)</a>
                 <br /><br />
                 We will delete your pack file after a week to keep the server healthy. Feel free to come back and create a new pack anytime.
             </p>
         </div>
         <div v-if="info==null">
-            <a class="btn" :href="'http://'+hostURL+'/sg/StructureGenerator-v1.3.1.zip'" download="JDawgtorStructureGenerator.zip">Download Latest Structure Generator</a>
+            <a class="btn" :href="'https://'+hostURL+'/sg/StructureGenerator-v1.3.1.zip'" download="JDawgtorStructureGenerator.zip">Download Latest Structure Generator</a>
             <div class="notice" style="margin-top: 5px;">Just in case you just need the Generator</div>
         </div>
         <br /><br />
@@ -303,7 +303,7 @@ export default {
       },
       saveFileUploads(formData) {
         this.currentStatus = STATUS_SAVING;
-        axios.post('http://'+this.hostURL+'/api/v1/upload',formData,{headers: { "x-user-guid": this.userGUID }})
+        axios.post('https://'+this.hostURL+'/api/v1/upload',formData,{headers: { "x-user-guid": this.userGUID }})
           .then(x => {
             this.uploadedFiles = [].concat(x.data);
             this.currentStatus = STATUS_SUCCESS;
@@ -435,7 +435,7 @@ export default {
             }
             if(fileErrCnt == 0 && fileFormatErrCnt == 0){
                 console.log('Success Du Fromage!');
-                axios.post('http://'+this.hostURL+'/api/v1/structure',msgOpts).then(response => (this.info = response.data))
+                axios.post('https://'+this.hostURL+'/api/v1/structure',msgOpts).then(response => (this.info = response.data))
             }else{
                 Swal.fire({
                     icon: 'warning',
