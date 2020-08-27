@@ -11,6 +11,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.12.0",
     "axios": "^0.19.2",
+    "http-server": "^0.12.3",
     "nuxt": "^2.14.0",
     "sweetalert2": "^9.17.1"
   },
@@ -18,5 +19,20 @@
     "@nuxtjs/tailwindcss": "^2.1.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3"
-  }
+  },
+  "engines": {
+    "node": "~12.18.3"
+  },
+  "description": "Front End for JDawgtor's Custom Structure Generator Minecraft Data Pack",
+  "main": "nuxt.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Copy-Paste-Pray/jdawgtor-nuxt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Copy-Paste-Pray/jdawgtor-nuxt/issues"
+  },
+  "homepage": "https://github.com/Copy-Paste-Pray/jdawgtor-nuxt#readme"
 }

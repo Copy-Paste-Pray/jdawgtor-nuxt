@@ -499,7 +499,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
     label{padding-right: 10px;}
     h1{margin-bottom: 10px;}
     section{margin: 10px 10px 0 10px;}
