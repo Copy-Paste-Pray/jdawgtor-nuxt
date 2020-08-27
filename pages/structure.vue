@@ -363,7 +363,7 @@ export default {
                         thisfile.requiredValuesList.push('PosX');
                         requiredErrcnt++;
                     }else{
-                        if(thisfile.posx.toString().match(/^[\d]{1,5}$/g)==null){
+                        if(thisfile.posx.toString().match(/^[\d\-]{1,5}$/g)==null){
                             thisfile.formatValuesList.push('PosX');
                             formatErrcnt++;
                             fileFormatErrCnt++;
@@ -373,7 +373,7 @@ export default {
                         thisfile.requiredValuesList.push('PosY');
                         requiredErrcnt++;
                     }else{
-                        if(thisfile.posy.toString().match(/^[\d]{1,5}$/g)==null){
+                        if(thisfile.posy.toString().match(/^[\d\-]{1,5}$/g)==null){
                             thisfile.formatValuesList.push('PosY');
                             formatErrcnt++;
                             fileFormatErrCnt++;
@@ -383,7 +383,7 @@ export default {
                         thisfile.requiredValuesList.push('PosZ');
                         requiredErrcnt++;
                     }else{
-                        if(thisfile.posz.toString().match(/^[\d]{1,5}$/g)==null){
+                        if(thisfile.posz.toString().match(/^[\d\-]{1,5}$/g)==null){
                             thisfile.formatValuesList.push('PosZ');
                             formatErrcnt++;
                             fileFormatErrCnt++;
